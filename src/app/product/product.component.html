@@ -1,0 +1,42 @@
+<div class="container">
+  <p>
+    <label>Search</label>
+    <input type="text" #query (keyup)="filter(query.value)" class="form-control" placeholder="Search...">
+  </p>
+</div>
+
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Code</th>
+        <th>Price</th>
+        <th>Rating</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of filteredProducts; let i = index">
+        <td>{{prod.productId}}</td>
+        <td><a style="cursor:pointer"
+          [routerLink]="['/product',prod.productId]">
+          {{prod.productName}}</a>
+        </td>
+        <td>{{prod.productCode}}</td>
+        <td>{{prod.price}}</td>
+        <td>{{prod.starRating}}</td>
+        <td>
+          <button type="button" class="btn btn-info" 
+                data-toggle="collapse" [attr.data-target]="'#'+i"
+                (click)=showOrHide()>
+                {{showHide}} Image
+          </button>
+          <div id={{i}} class="collapse">
+              <img [src]= "prod.imageUrl" alt="..." width="80" height="80">
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
